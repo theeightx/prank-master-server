@@ -138,7 +138,9 @@
             // --- 1. JUNGIMASIS PRIE SERVERIO (SVARBU!) ---
             let socket = null;
             try {
-                socket = new WebSocket(`ws://${window.location.host}`);
+                // --- SAUGUS JUNGIMAS (Tinka ir Localhost, ir Render) ---
+                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const socket = new WebSocket(`${protocol}//${window.location.host}`);
                 socket.onopen = () => console.log("✅ WebSocket prisijungė sėkmingai!");
                 socket.onerror = (err) => console.error("❌ WebSocket klaida:", err);
             } catch (e) {
